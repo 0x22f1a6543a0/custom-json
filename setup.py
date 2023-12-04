@@ -5,11 +5,11 @@ long_description = ""
 setup(
     name='custom-json',
     version='0.0.5',
-    description='batter than python json',
+    description='A smart json tools',
     long_description = long_description,
-    url='',
+    url='https://github.com/0x22f1a6543a0/custom-json',
     author='Zhang Jiaqi',
-    author_email='TODO',
+    author_email='2953911716@qq.com',
     license='MIT',
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -17,19 +17,11 @@ setup(
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
     ],
     keywords='TODO',
     install_requires = [
       "TODO",
     ],
     packages=find_packages(),
-    include_package_data = True, #
-    entry_points={
-        'console_scripts':[
-            'cmdname = cmdtoolfilepath:methodname'
-        ]
-      },
+    include_package_data=True,
 )
