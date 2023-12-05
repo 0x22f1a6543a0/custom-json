@@ -1,7 +1,7 @@
 import json
 
-__version__ = __VERSION__ = '1.0.0'
-__all__ = ['write', 'append', 'revise', 'read', 'exist',
+__version__ = __VERSION__ = '1.1.0'
+__all__ = ['write', 'append', 'revise', 'read', 'exist', 'father', 'parent',
            'list_key', 'list_value', 'list_line', 'list_split']
 
 def write(__value__: dict,fp: str, encoding: str="utf-8", ensure_ascii: bool=False, back: bool=True,indent: int=3):

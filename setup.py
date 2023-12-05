@@ -1,10 +1,9 @@
 from setuptools import setup,find_packages
 
-long_description = "README.md"
-
+long_description = "GOOD"
 setup(
     name='smarterjson',
-    version='1.0.0',
+    version='1.1.0',
     description='A smarter than python json', 
     long_description = long_description, 
     url='https://github.com/0x22f1a6543a0/smarterjsons',
