@@ -7,7 +7,7 @@ setup(
     version='1.0.0',
     description='A smarter than python json', 
     long_description = long_description, 
-    url='TODO',
+    url='https://github.com/0x22f1a6543a0/smarterjsons',
     author='Zhang Jiaqi',
     author_email='2953911716@qq.com',
     license='MIT',
