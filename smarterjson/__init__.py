@@ -1,7 +1,7 @@
 import json
 
-__version__ = __VERSION__ = '1.1.0'
-__all__ = ['write', 'append', 'revise', 'read', 'exist', 'father', 'parent',
+__version__ = __VERSION__ = '1.4.1'
+__all__ = ['write', 'append', 'revise', 'read', 'exist', 'value_parent', 'key_parent',
            'list_key', 'list_value', 'list_line', 'list_split']
 
 def write(__value__: dict,fp: str, encoding: str="utf-8", ensure_ascii: bool=False, back: bool=True,indent: int=3):
@@ -15,6 +15,7 @@ def write(__value__: dict,fp: str, encoding: str="utf-8", ensure_ascii: bool=Fal
     :param back: return or do not return write before data, *True
     :return: if back equals True, then return write before data. Else None *True
     """
+    ori_data = None
     with open(fp, "r", encoding=encoding) as f:
         try:
             ori_data = data = json.load(f)
@@ -236,27 +237,31 @@ def revise(__content__: tuple, __value__: any, fp=None, encoding: str="utf-8", e
     with open(fp, "w", encoding=encoding) as f:
         json.dump(data, f, ensure_ascii=ensure_ascii, indent=indent)
 
-def father(__value__, fp: str=None, encoding: str="utf-8"):
+def value_parent(__value__, fp: str=None, encoding: str="utf-8", return_type: type=str):
     """
     Find json data's values' parents,
     values  ->  key1  --> key2 --> ... --> __value__
     :param __value__: You want to find the value in data
     :param fp: file path
     :param encoding: encoding, such as UTF-8, GB18030, GBK *utf-8
+    :param return_type: return type, support str or list *str
     :return: result or None
     """
-    def parent(json_data, value, path=""):
+    types = [str, list]
+    if return_type not in types:
+        raise ReturnTypeError(f"Unsupport types, only support {types}")
+    def father(json_data, value, path=""):
         if isinstance(json_data, dict):
             for key, val in json_data.items():
                 if val == value:
                     return f"values{path}  ->  {key}  ->  {val}"
                 elif isinstance(val, dict) or isinstance(val, list):
-                    result = parent(val, value, f"{path}  ->  {key}")
+                    result = father(val, value, f"{path}  ->  {key}")
                     if result:
                         return result
         elif isinstance(json_data, list):
             for item in json_data:
-                result = parent(item, value, path)
+                result = father(item, value, path)
                 if result:
                     return result
         return None
@@ -267,17 +272,24 @@ def father(__value__, fp: str=None, encoding: str="utf-8"):
         except:
             data = []
         f.close()
-    return parent(data, __value__)
+    if return_type == str:
+        return father(data, __value__)
+    else:
+        return father(data, __value__).replace(" ", "").split("->")
 
-def parent(__key__, fp: str=None, encoding: str="utf-8"):
+def key_parent(__key__, fp: str=None, encoding: str="utf-8", return_type: type=str):
     """
     Find json data's keys' parents,
     keys  ->  key1  --> key2 --> ... --> __key__
     :param __key__: You want to find the key in data
     :param fp: file path
     :param encoding: encoding, such as UTF-8, GB18030, GBK *utf-8
+    :param return_type: return type, support str or list *str
     :return: result or None
     """
+    types = [str, list]
+    if return_type not in types:
+        raise ReturnTypeError(f"Unsupport types, only support {types}")
     def father(json_data, key, path=''):
         if isinstance(json_data, dict):
             for k, val in json_data.items():
@@ -300,8 +312,10 @@ def parent(__key__, fp: str=None, encoding: str="utf-8"):
         except:
             data = []
         f.close()
-
-    return father(data, __key__)
+    if return_type == str:
+        return father(data, __key__)
+    else:
+        return father(data, __key__).replace(" ","").split("->")
 
 
 # show error

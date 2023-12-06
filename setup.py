@@ -1,9 +1,9 @@
 from setuptools import setup,find_packages
 
-long_description = "GOOD"
+long_description = "A python package about json, smarter, quicker and better!"
 setup(
     name='smarterjson',
-    version='1.1.0',
+    version='1.4.1',
     description='A smarter than python json', 
     long_description = long_description, 
     url='https://github.com/0x22f1a6543a0/smarterjsons',
@@ -13,7 +13,7 @@ setup(
     classifiers=[
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3',
     ],
     packages=find_packages(),
     include_package_data = True,
